@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
+use Illuminate\Support\Facades\App;
 class UserController extends Controller
 {
+    
     public function index(){
         return view('index');
     }
@@ -16,16 +20,18 @@ class UserController extends Controller
             'password'=>'required'
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        if(!$user){
-            return redirect()->back()->withErrors(['no hay usuarios'=>'No hay usuarios registrados con este email']);
+        if(Auth::attempt($datos)){
+            $user = Auth::user();
+            $items = Item::all();
+            return redirect()->route('dashboard', compact('items'));
+        }else {
+            return redirect()->back()->withErrors(['error'=> 'Credenciales invalidas']);
         }
-
-        if(!Hash::check($request->password, $user->password)){
-            return redirect()->back()->withErrors(['no hay usuarios'=>'Contraseña Incorrecta']);
-        }
-
-        return redirect()->back()->withErrors(['ok'=>"Bienvenido $user->name"]);
         
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('dashboard')->withErrors(['ok'=>'Sesion cerrada']);
     }
 }
