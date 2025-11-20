@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div id="mobile-menu" class="bg-white flex flex-col  space-y-2 mt-2 md:hidden">
+    <div id="mobile-menu" class="bg-white flex flex-col hidden  space-y-2 mt-2 md:hidden">
       @yield('nav-links')
     </div>
   </div>
