@@ -60,8 +60,3 @@
     </div>
 
 @endsection
-
-
-@section('scripts')
-    @include('partials/navbar-action')
-@endsection

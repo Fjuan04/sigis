@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('warrant')->constrained('users', 'id');
             $table->enum('status', ['aprobado', 'denegado', 'en proceso'])->default('en proceso');
-            $table->text('acta')->nullable()->default('solicitado');
+            $table->text('acta')->nullable();
             $table->timestamps();
         });
     }
