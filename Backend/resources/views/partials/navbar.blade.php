@@ -19,7 +19,7 @@
         </svg>
       </button>
 
-      <div id="menu" class="hidden md:flex items-center space-x-4 text-white">
+      <div id="menu" class="hidden  md:flex items-center space-x-4 text-white">
         @yield('nav-links')
       </div>
     </div>
